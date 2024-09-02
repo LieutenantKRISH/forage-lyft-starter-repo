@@ -1,25 +1,32 @@
 import unittest
-from datetime import datetime
-from engine.model.calliope import Calliope
-from engine.model.glissade import Glissade
-from engine.model.palindrome import Palindrome
-from engine.model.rorschach import Rorschach
-from engine.model.thovex import Thovex
+from engine import Engine
+from battery import Battery
 
-class TestCalliope(unittest.TestCase):
-    # Tests for Calliope model
+class TestEngine(unittest.TestCase):
+    def setUp(self):
+        # Create an instance of Engine to be used in tests
+        self.engine = Engine()
 
-class TestGlissade(unittest.TestCase):
-    # Tests for Glissade model
+    def test_engine_start(self):
+        self.engine.start()
+        self.assertTrue(self.engine.is_running, "Engine should be running after start")
 
-class TestPalindrome(unittest.TestCase):
-    # Tests for Palindrome model
+    def test_engine_stop(self):
+        self.engine.stop()
+        self.assertFalse(self.engine.is_running, "Engine should not be running after stop")
 
-class TestRorschach(unittest.TestCase):
-    # Tests for Rorschach model
+class TestBattery(unittest.TestCase):
+    def setUp(self):
+        # Create an instance of Battery to be used in tests
+        self.battery = Battery()
 
-class TestThovex(unittest.TestCase):
-    # Tests for Thovex model
+    def test_battery_charge(self):
+        self.battery.charge()
+        self.assertGreater(self.battery.charge_level, 0, "Battery charge level should be greater than 0 after charging")
+
+    def test_battery_discharge(self):
+        self.battery.discharge()
+        self.assertLess(self.battery.charge_level, 100, "Battery charge level should be less than 100 after discharging")
 
 if __name__ == '__main__':
     unittest.main()
